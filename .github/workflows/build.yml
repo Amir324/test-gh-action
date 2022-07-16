@@ -25,4 +25,8 @@ jobs:
 
     - name: Slack Failure Notification
       if: failure()
-      run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      run: echo "🎉 FAILURE"
+
+    - name: Slack Success Notification
+      if: success()
+      run: echo "🎉 SUCCESS"
