@@ -2,10 +2,8 @@
 name: Node.js CI
 
 on:
-  push:
-    branches: [ master ]
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
 
 jobs:
   build:
@@ -22,4 +20,13 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
+    - run: npm install yarn
     - run: yarn build
+
+    - name: Slack Failure Notification
+      if: failure()
+      run: echo "🎉 FAILURE"
+
+    - name: Slack Success Notification
+      if: success()
+      run: echo "🎉 SUCCESS"
